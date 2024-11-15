@@ -1,0 +1,84 @@
+@use "./variables" as *;
+@use "sass:color";
+@use "sass:map";
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus,
+    &:focus-within {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Kitty Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+/// Create a media query based on a specific screen size
+/// @author Younes Atyq
+/// @param {String} $screen - The key of the screen size from the $screens map
+$screens: (
+  "sm": 576px,
+  "md": 768px,
+  "l": 992px,
+  "xl": 1200px,
+);
+@mixin mq($screen) {
+  @if (map.has-key($screens, $screen)) {
+    @media (max-width: map.get($screens, $screen)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $screen) {
+      @content;
+    }
+  }
+}
+
+/// Create a circular icon
+/// @param {Length} $size - The size of the icon
+/// @param {Length} $svg-size - The size of the SVG
+/// @param {Color} $color - The color of the icon
+/// @author Younes Atyq
+@mixin circular-icon($size, $svg-size, $color) {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: $color;
+  width: $size;
+  height: $size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: $svg-size;
+    height: $svg-size;
+    transition: scale 0.3s ease-in-out;
+  }
+  @include on-event {
+    background-color: color.adjust($color, $lightness: -10%);
+    svg {
+      color: whitesmoke;
+      scale: 1.2;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@use "../abstracts" as *;
+
+.app {
+  display: grid;
+  grid-template-columns: auto minmax(min-content, 1fr);
+  justify-content: center;
+  gap: 2em;
+  height: 100dvh;
+  height: 100vh;
+  padding: 0.5em 0em 0.5em 2em;
+  position: relative;
+}

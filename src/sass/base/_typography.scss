@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+// -----------------------------------------------------------------------------
+
+body {
+  color: $deep-space;
+  font: normal 100% / 1.4 $font-stack;
+  @include mq("l") {
+    font-size: 95%;
+  }
+}

@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/// Normal text font
+/// @type List
+$font-stack: "Urbanist", sans-serif !default;
+
+// font size
+$font-size: 1rem !default;
+@media (max-width: 992px) {
+  $font-size: 0.9rem !default;
+}
+
+// Colors
+$black: #000000;
+$white: #ffffff;
+$deep-space: #0d0924;
+$forest-green: #14655e;
+$white-snow: #f6f6f6;
+$dark-gray: #555265;

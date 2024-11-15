@@ -1,0 +1,45 @@
+@use "../abstracts" as *;
+
+.sidebar {
+  color: $white-snow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  top: 1%;
+  left: 0;
+  background-color: $deep-space;
+  transition: transform 0.3s ease-in-out;
+  @include mq("l") {
+    position: fixed;
+    transform: translateX(-100%);
+    height: 99%;
+    z-index: 100;
+    width: 40%;
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
+    &.active {
+      transform: translateX(0%);
+    }
+  }
+  ul {
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+  }
+  .icon,
+  button.close-icon {
+    @include circular-icon(2.5em, 1.15em, $forest-green);
+  }
+  button.close-icon {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    border: none;
+    cursor: pointer;
+    color: $white-snow;
+  }
+}

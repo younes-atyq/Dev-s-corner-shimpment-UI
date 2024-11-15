@@ -1,0 +1,243 @@
+@use "../abstracts" as *;
+@use "sass:color";
+
+.shipment-container {
+  background-color: $white-snow;
+  position: relative;
+  border-radius: 2em;
+  padding: 2em;
+  // max-width: 73em;
+  // header
+  button.menu-icon {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    border: none;
+    cursor: pointer;
+    color: $white-snow;
+    @include circular-icon(2.25em, 0.9em, $deep-space);
+    display: none;
+    @include mq("l") {
+      display: flex;
+    }
+  }
+  .shipment-header {
+    display: grid;
+    grid-template-columns: auto auto;
+    @include mq("md") {
+      grid-template-columns: auto;
+    }
+    h1 {
+      font-size: 6em;
+      font-weight: 500;
+      @include mq("l") {
+        font-size: 4em;
+      }
+      @include mq("sm") {
+        font-size: 2.5em;
+      }
+    }
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      @include mq("md") {
+        order: -1;
+      }
+      ul {
+        display: flex;
+        gap: 0.75em;
+        $profile-icon-size: 3.18em;
+        $icon-container-size: 2.93em;
+        $icon-size: 1em;
+        @include mq("md") {
+          $profile-icon-size: 2.5em;
+          $icon-container-size: 2em;
+          $icon-size: 0.9em;
+        }
+        li {
+          color: $white-snow;
+          @include circular-icon($icon-container-size, $icon-size, $deep-space);
+          &:last-child {
+            @include circular-icon($profile-icon-size, $icon-size, $deep-space);
+            position: relative;
+            top: $icon-container-size - $profile-icon-size;
+          }
+        }
+      }
+    }
+    .search-bar {
+      background-color: $deep-space;
+      min-width: 5em;
+      max-width: 23em;
+      width: 100%;
+      border-radius: 0.7em;
+      overflow: hidden;
+      input {
+        background-color: $deep-space;
+        padding: 0.8em 1.75em;
+        color: $white-snow;
+        caret-color: $white-snow;
+        border: none;
+        width: 100%;
+        @include mq("md") {
+          padding: 0.5em 1em;
+        }
+        &::placeholder {
+          color: $white-snow;
+        }
+      }
+    }
+  }
+  // main
+
+  .shipment-main {
+    display: grid;
+    grid-column: minmax(min-content, 1fr);
+    .options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 72.5em;
+      margin-top: 1em;
+      @include mq("md") {
+        flex-direction: column;
+        align-items: start;
+        gap: 1em;
+        margin-bottom: 1em;
+      }
+      .shipment-types {
+        grid-area: types;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 2em;
+        @include mq("md") {
+          gap: 0.7em;
+          align-items: start;
+          flex-direction: column;
+        }
+        li {
+          display: block;
+          font-weight: 500;
+          cursor: pointer;
+          position: relative;
+          &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: $forest-green;
+            transition: width 0.3s ease-in-out;
+          }
+          &:hover::after {
+            width: 97%;
+          }
+        }
+      }
+      .shipment-control {
+        grid-area: control;
+        display: flex;
+        gap: 1em;
+        justify-content: flex-end;
+        li {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+          padding: 0.8em 0.7em;
+          color: $white-snow;
+          background-color: $deep-space;
+          border-radius: 0.7em;
+          cursor: pointer;
+          @include on-event {
+            background-color: color.adjust($deep-space, $lightness: -10%);
+            color: whitesmoke;
+          }
+          @include mq("md") {
+            padding: 0.4em 0.8em;
+            width: max-content;
+            svg {
+              font-size: 1em;
+            }
+          }
+          &:first-child {
+            background-color: $forest-green;
+            @include on-event {
+              background-color: color.adjust($forest-green, $lightness: -10%);
+              color: whitesmoke;
+            }
+          }
+          @include mq("md") {
+            padding: 0.4em 0.8em;
+          }
+        }
+      }
+    }
+    .table-container {
+      overflow: auto;
+      margin-top: 0.5em;
+      // width: 100%;
+      .shipment-table {
+        grid-area: table;
+        min-width: 73em;
+        // gap: 0.5em;
+        // margin-top: 2em;
+
+        tr {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          border-radius: 0.7em;
+          // margin-block: 1em;
+          padding: 0.5em;
+          th {
+            text-align: start;
+            color: $dark-gray;
+            font-weight: 500;
+            font-size: 1em;
+            margin-bottom: 0.5em;
+          }
+          td {
+            padding-block: 0.5em;
+            font-weight: 600;
+            height: 2.9em;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            &.generate-tender,
+            &.status {
+              padding-inline: 0.7em 0;
+              // margin: 0.2em;
+              color: $white-snow;
+              background-color: $deep-space;
+              border-radius: 0.7em;
+              cursor: pointer;
+              @include on-event {
+                background-color: color.adjust($deep-space, $lightness: -10%);
+                color: whitesmoke;
+              }
+              &.generate-tender {
+                background-color: $forest-green;
+                margin-right: 0.5em;
+                @include on-event {
+                  background-color: color.adjust(
+                    $forest-green,
+                    $lightness: -10%
+                  );
+                  color: whitesmoke;
+                }
+              }
+            }
+          }
+        }
+        tbody {
+          tr {
+            @include on-event {
+              background-color: color.adjust($dark-gray, $lightness: 50%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
