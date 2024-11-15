@@ -4,19 +4,13 @@ import FaceIcon from "@mui/icons-material/Face";
 import AddIcon from "@mui/icons-material/Add";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useEffect, useState } from "react";
+import shipments from "../data";
 
 function Shipments() {
-  const [data, setData] = useState();
   const handleClick = () => {
     const sidebar = document.querySelector(".sidebar");
     sidebar.classList.add("active");
   };
-  useEffect(() => {
-    fetch("../../data.json")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
   return (
     <div className="shipment-container">
       <button onClick={handleClick} className="menu-icon">
@@ -71,13 +65,13 @@ function Shipments() {
               </tr>
             </thead>
             <tbody>
-              {data?.map((item) => (
+              {shipments?.map((item) => (
                 <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.commodity}</td>
                   <td>{item.destination}</td>
                   <td>{item.type}</td>
-                  <td>{item.GrossWeight}</td>
+                  <td>{item.grossWeight}</td>
                   <td className="generate-tender">Generate Tender</td>
                   <td className="status">{item.status}</td>
                 </tr>
